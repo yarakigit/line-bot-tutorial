@@ -37,6 +37,9 @@
             - 公開する関数にチェックボックスを入れる > 権限 > メンバーを追加 > 新しいメンバー : allUsers > ロール : Cloud Functions 起動元 
                 - [Firebase functionsで 403 error "Your client does not have permission to get URL /** from this server" となった場合の解決策](https://qiita.com/toshiaki_takase/items/ce65cd5582a80917b52f)
 
+    - リッチメニューの操作
+        - LINE Official Account Manager で行う
 
 ## 参考文献
+- [Github, line-bot-sdk-python](https://github.com/line/line-bot-sdk-python)
 - [Cloud Functions (Python3)入門用に LINE BOTを作ってみる](https://qiita.com/spre55/items/da2ded18ac4652abb936)
