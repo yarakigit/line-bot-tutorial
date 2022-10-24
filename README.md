@@ -37,7 +37,7 @@
             - 公開する関数にチェックボックスを入れる > 権限 > メンバーを追加 > 新しいメンバー : allUsers > ロール : Cloud Functions 起動元 
                 - [Firebase functionsで 403 error "Your client does not have permission to get URL /** from this server" となった場合の解決策](https://qiita.com/toshiaki_takase/items/ce65cd5582a80917b52f)
 
-    - リッチメニューの操作
+    - リッチメニューの作成
         - LINE Official Account Manager で行う
 
 ## 参考文献
