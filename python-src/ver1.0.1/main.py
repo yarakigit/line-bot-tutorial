@@ -14,7 +14,7 @@ from linebot.models import (
     MessageEvent, PostbackEvent,
     TextMessage, TextSendMessage, LocationMessage, ImageSendMessage, TemplateSendMessage,
     QuickReply, QuickReplyButton, ButtonsTemplate,
-    LocationAction, DatetimePickerTemplateAction
+    LocationAction, DatetimePickerAction
 )
 
 from logging import getLogger, DEBUG
@@ -55,6 +55,8 @@ def main(request):
                 logger.debug("data : datetime-picker-action-postback")
                 messages = TextSendMessage(text=event.postback.params['date'])#dictのキーはmodeのもの
                 line_bot_api.reply_message(event.reply_token, messages=messages)
+            else:
+                logger.debug("data : Not Match")
         elif isinstance(event, MessageEvent):
             logger.debug("Get MessageEvent")
             if isinstance(event.message, LocationMessage):
@@ -77,18 +79,18 @@ def main(request):
                     date_time_min = date_time_now - date_period
                     date_time_max = date_time_now + date_period
                     messages = TemplateSendMessage(
-                    alt_text='日付を選ぶ',
-                    template=ButtonsTemplate(
-                        text='日付を設定',
-                        title='YYYY-MM-dd',
-                        actions=[
-                            DatetimePickerTemplateAction(
-                            label='設定',
-                            data='datetime-picker-action-postback',
-                            mode='date',
-                            initial = '{:04d}-{:02d}-{:02d}'.format(date_time_now.year, date_time_now.month, date_time_now.day),
-                            min     = '{:04d}-{:02d}-{:02d}'.format(date_time_min.year, date_time_min.month, date_time_min.day),
-                            max     = '{:04d}-{:02d}-{:02d}'.format(date_time_max.year, date_time_max.month, date_time_max.day)
+                        alt_text = '日付を設定',   
+                        template=ButtonsTemplate(
+                            text='日付を設定',
+                            title='YYYY-MM-dd',
+                            actions=[
+                                DatetimePickerAction(
+                                label='設定',
+                                data='datetime-picker-action-postback',
+                                mode='date',
+                                initial = '{:04d}-{:02d}-{:02d}'.format(date_time_now.year, date_time_now.month, date_time_now.day),
+                                min     = '{:04d}-{:02d}-{:02d}'.format(date_time_min.year, date_time_min.month, date_time_min.day),
+                                max     = '{:04d}-{:02d}-{:02d}'.format(date_time_max.year, date_time_max.month, date_time_max.day)
                                 )
                             ]
                         )
@@ -102,5 +104,7 @@ def main(request):
                 else:
                     messages = TextSendMessage(text=event.message.text)
                     line_bot_api.reply_message(event.reply_token, messages=messages)
+            else:
+                logger.debug("Get Text Not Match")
        
     return jsonify({ 'message': 'ok'})
